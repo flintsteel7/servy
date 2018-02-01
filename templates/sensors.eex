@@ -1,0 +1,9 @@
+<h1>Sensors</h1>
+
+<h2>Snapshots</h2>
+<figure>
+  <%= for snapshot <- snapshots do %>
+  <img alt="snapshot" src="<%= snapshot %>" />
+  <% end %>
+  <figcaption><%= inspect(location) %></figcaption>
+</figure>
