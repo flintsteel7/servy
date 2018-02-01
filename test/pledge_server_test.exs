@@ -14,7 +14,7 @@ defmodule PledgeServerTest do
     create_pledge("grace", 50)
     # prepare test list
     most_recent_pledges = [{"grace", 50}, {"daisy", 40}, {"curly", 30}]
-    # test  the server's cache
+    # test the server's cache
     assert recent_pledges() == most_recent_pledges
     # test the server's total
     assert total_pledged() == 120
