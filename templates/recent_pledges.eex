@@ -1,0 +1,9 @@
+<h1>Most Recent Pledges</h1>
+
+<ul>
+  <%= for {name, pledge} <- pledges do %>
+    <li><%= name %> pledged $<%= pledge %></li>
+  <% end %>
+</ul>
+
+<a href="/pledges/new">Make a pledge!</a>

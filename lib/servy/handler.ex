@@ -32,6 +32,10 @@ defmodule Servy.Handler do
     Servy.PledgeController.index(conv)
   end
 
+  def route(%Conv{method: "GET", path: "/pledges/new"} = conv) do
+    Servy.PledgeController.new(conv)
+  end
+
   def route(%Conv{method: "GET", path: "/404"} = conv) do
     counts = Servy.FourOhFourCounter.get_counts()
     %{ conv | resp_body: inspect(counts), status: 200 }
