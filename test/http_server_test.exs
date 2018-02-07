@@ -5,7 +5,7 @@ defmodule HttpServerTest do
   import Servy.HttpClient, only: [send_request: 0]
 
   test "Http Server Concurrency with Task" do
-    pid = spawn(fn() -> start(4003) end)
+    pid = spawn(fn -> start(4003) end)
 
     [
       "http://localhost:4003/wildthings",
@@ -26,9 +26,10 @@ defmodule HttpServerTest do
   end
 
   test "Http Server Concurrency" do
-    pid = spawn(fn() -> start(4002) end)
+    pid = spawn(fn -> start(4002) end)
 
-    parent = self() # the request-handling process
+    # the request-handling process
+    parent = self()
 
     for _ <- 1..5 do
       spawn(fn ->
@@ -49,7 +50,7 @@ defmodule HttpServerTest do
   end
 
   test "Http Server with HTTPoison" do
-    pid = spawn(fn() -> start(4001) end)
+    pid = spawn(fn -> start(4001) end)
 
     {_, response} = HTTPoison.get("http://localhost:4001/wildthings")
 
@@ -60,7 +61,7 @@ defmodule HttpServerTest do
   end
 
   test "Http Server with Http Client" do
-    pid = spawn(fn() -> start(4000) end)
+    pid = spawn(fn -> start(4000) end)
 
     response = send_request()
 
@@ -93,5 +94,4 @@ defmodule HttpServerTest do
   defp remove_whitespace(text) do
     String.replace(text, ~r{\s}, "")
   end
-
 end

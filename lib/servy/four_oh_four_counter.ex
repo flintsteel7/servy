@@ -6,33 +6,36 @@ defmodule Servy.UniServer do
   end
 
   def call(pid, message) do
-    send pid, {:call, self(), message}
+    send(pid, {:call, self(), message})
 
-    receive do {:response, response} -> response end
+    receive do
+      {:response, response} -> response
+    end
   end
 
   def cast(pid, message) do
-    send pid, {:cast, message}
+    send(pid, {:cast, message})
   end
 
   def listen_loop(state, callback_module) do
     receive do
       {:call, sender, message} when is_pid(sender) ->
         {response, new_state} = callback_module.handle_call(message, state)
-        send sender, {:response, response}
+        send(sender, {:response, response})
         listen_loop(new_state, callback_module)
+
       {:cast, message} ->
         new_state = callback_module.handle_cast(message, state)
         listen_loop(new_state, callback_module)
+
       unexpected ->
-        IO.puts "Unexpected messaged: #{inspect unexpected}"
+        IO.puts("Unexpected messaged: #{inspect(unexpected)}")
         listen_loop(state, callback_module)
     end
   end
 end
 
 defmodule Servy.FourOhFourCounter do
-
   @name :four_oh_four_counter
 
   alias Servy.UniServer
@@ -40,24 +43,24 @@ defmodule Servy.FourOhFourCounter do
   # Client Interface
 
   def start do
-    IO.puts "Starting the 404 counter..."
+    IO.puts("Starting the 404 counter...")
     UniServer.start(__MODULE__, %{}, @name)
   end
 
   def bump_count(path) do
-    UniServer.call @name, {:bump_count, path}
+    UniServer.call(@name, {:bump_count, path})
   end
 
   def get_counts do
-    UniServer.call @name, :get_counts
+    UniServer.call(@name, :get_counts)
   end
 
   def get_count(path) do
-    UniServer.call @name, {:get_count, path}
+    UniServer.call(@name, {:get_count, path})
   end
 
   def reset do
-    UniServer.cast @name, :reset
+    UniServer.cast(@name, :reset)
   end
 
   # Server Callbacks

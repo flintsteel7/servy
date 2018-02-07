@@ -1,5 +1,4 @@
 defmodule Servy.BearController do
-
   alias Servy.Wildthings
   alias Servy.Bear
 
@@ -20,10 +19,10 @@ defmodule Servy.BearController do
   end
 
   def create(conv, %{"name" => name, "type" => type}) do
-    %{ conv | resp_body: "Created a #{type} bear named #{name}!", status: 201}
+    %{conv | resp_body: "Created a #{type} bear named #{name}!", status: 201}
   end
 
   def delete(conv, _params) do
-    %{ conv | resp_body: "Bears must never be deleted!", status: 403}
+    %{conv | resp_body: "Bears must never be deleted!", status: 403}
   end
 end

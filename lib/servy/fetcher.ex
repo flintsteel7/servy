@@ -1,5 +1,4 @@
 defmodule Servy.Fetcher do
-
   def async(fun) do
     parent = self()
     spawn(fn -> send(parent, {self(), :result, fun.()}) end)
@@ -8,9 +7,9 @@ defmodule Servy.Fetcher do
   def get_result(pid) do
     receive do
       {^pid, :result, value} -> value
-    after 2000 ->
-      "Connection timed out"
+    after
+      2000 ->
+        "Connection timed out"
     end
   end
-
 end
