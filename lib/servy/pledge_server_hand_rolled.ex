@@ -32,7 +32,7 @@ end
 
 defmodule Servy.PledgeServerHandRolled do
 
-  @name :pledge_server
+  @name :pledge_server_hand_rolled
 
   alias Servy.GenericServer
 
@@ -88,21 +88,21 @@ defmodule Servy.PledgeServerHandRolled do
 
 end
 
-alias Servy.PledgeServerHandRolled
+# alias Servy.PledgeServerHandRolled
 
-pid = PledgeServerHandRolled.start()
+# pid = PledgeServerHandRolled.start()
 
-send pid, {:stop, "hammertime"}
+# send pid, {:stop, "hammertime"}
 
-IO.inspect PledgeServerHandRolled.create_pledge("larry", 10)
-IO.inspect PledgeServerHandRolled.create_pledge("moe", 20)
-IO.inspect PledgeServerHandRolled.create_pledge("curly", 30)
-IO.inspect PledgeServerHandRolled.create_pledge("daisy", 40)
+# IO.inspect PledgeServerHandRolled.create_pledge("larry", 10)
+# IO.inspect PledgeServerHandRolled.create_pledge("moe", 20)
+# IO.inspect PledgeServerHandRolled.create_pledge("curly", 30)
+# IO.inspect PledgeServerHandRolled.create_pledge("daisy", 40)
 
-PledgeServerHandRolled.clear()
+# PledgeServerHandRolled.clear()
 
-IO.inspect PledgeServerHandRolled.create_pledge("grace", 50)
+# IO.inspect PledgeServerHandRolled.create_pledge("grace", 50)
 
-IO.inspect PledgeServerHandRolled.recent_pledges()
+# IO.inspect PledgeServerHandRolled.recent_pledges()
 
-IO.inspect PledgeServerHandRolled.total_pledged()
+# IO.inspect PledgeServerHandRolled.total_pledged()
