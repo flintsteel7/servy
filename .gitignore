@@ -25,3 +25,4 @@ servy-*.tar
 # IDEs and Editors
 .idea
 .vscode
+.elixir_ls
